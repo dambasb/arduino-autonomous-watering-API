@@ -1,0 +1,7 @@
+node_modules/
+bower_components/
+public/js/app.components.min.js.map
+public/js/app.min.js.map
+public/js/env.js
+.vscode/
+package-lock.json
