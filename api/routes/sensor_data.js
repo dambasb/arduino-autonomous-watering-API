@@ -1,4 +1,4 @@
-var sensor_data = require('../models/sensor_data_model');
+var sensor_data = require('../models/sensor_data');
 var body_parser = require('body-parser');
 
 module.exports = function (app) {
