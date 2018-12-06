@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const sensorDataRoutes = require('./api/routes/sensor_data');
-
+const sensorDataRoutes = require('./api/routes/sensorData');
+var config = require('./config');
 mongoose.connect(config.getDbConnectionString());
 
 app.use(morgan('dev'));
