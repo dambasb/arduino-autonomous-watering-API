@@ -4,6 +4,26 @@ const mongoose = require('mongoose');
 
 const SensorData = require('../models/sensorData');
 
+
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'dkolobaric@gmail.com',
+        pass: 'balishag'
+    }
+});
+
+var mailOptions = {
+    from: 'dkolobaric@gmail.com',
+    to: 'dkolobaric@yahoo.com',
+    subject: 'Sending Email using Node.js',
+    text: 'It is to hot!'
+};
+
+
+
 router.get('/', (req, res, next) => {
     SensorData.find()
         .select('temperature airHumidity landHumidity _id')
@@ -41,6 +61,17 @@ router.post("/", (req, res, next) => {
         airHumidity: req.body.airHumidity,
         landHumidity: req.body.landHumidity
     });
+    if (data.temperature > 30) {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+    
+
     data
         .save()
         .then(result => {
